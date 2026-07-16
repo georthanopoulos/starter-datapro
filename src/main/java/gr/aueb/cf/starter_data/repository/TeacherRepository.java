@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-//@Repository -- Not needed in cases we extend JPA Repository! Otherwise, we DO need to add it! SOS!
+//@Repository -- Not needed when we extend the JPA Repository! Otherwise, we DO need to add it! SOS!
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     Optional<Teacher> findByUuid(UUID uuid);                                       //"equals" is implied.
