@@ -18,12 +18,13 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     List<Teacher> findByActiveTrue();
 
-    List<Teacher> findByLastnameStartingWith(String keyword);                      //LIKE keyword%  --preferred case, quicker!
-    List<Teacher> findByLastnameContainingIgnoreCase(String keyword);              //LIKE %keyword%
+    List<Teacher> findByLastnameStartingWith(String keyword);                      //LIKE keyword% equivalent --preferred case, quicker!
+    List<Teacher> findByLastnameContainingIgnoreCase(String keyword);              //LIKE %keyword% equivalent
 
     boolean existsByLastname(String lastname);
 
-    long countByActiveTrue();
+    long countByActiveTrue();                                                     // All the above until here, are the so called Derived queries. And are very efficient and worth using. Spring boot does the SQL equivalent command. Here is only verb-field-keyword.
+                                                                                  // For simple-to-middle complex queries only.  When complicated queries are needed including 3-4 JOIN then the best way is the below one with @query in JPQL!!!
 
     @Query("SELECT t FROM Teacher t WHERE t.lastname LIKE :prefix% AND t.active = true")
     List<Teacher> findActiveByPrefix(@Param("prefix") String prefix);
