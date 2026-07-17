@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Component
-@RequiredArgsConstructor                                                   // Creates a constructor automatically. As shown in the "muted" part below. Should it be private final only!!!
-public class TeacherRunner implements CommandLineRunner {                  // By starting, it runs through Command Line Runner (CLR).
+@Component                                                                 // @Component -> Spring finds this class, creates it as Bean and calls run() at the startup.
+@RequiredArgsConstructor                                                   // @RequestArgsConstructor -> Creates a constructor automatically. (As shown in the "muted" part below). Only in case is set as: private final!!!
+public class TeacherRunner implements CommandLineRunner {                  // CLI -> is a functional interface of springBoot with one run(String... args) method, that is executed only once, right after the full-boot of the application context (=> Beans-created AND Injections-performed).
+
 
     private final TeacherRepository teacherRepository;
 
@@ -19,7 +20,7 @@ public class TeacherRunner implements CommandLineRunner {                  // By
 //    }
 
     @Override
-    public void run(String... args) throws Exception {                     // ... -> it means that we can pass parameters into the command on the terminal (for creating the .jar)!
+    public void run(String... args) throws Exception {                     // ... -> it means that we can pass arguments into the command on the terminal (for creating the .jar)!
 
         Teacher teacher1 = new Teacher();
         teacher1.setFirstname("John");

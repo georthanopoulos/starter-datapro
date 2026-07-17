@@ -16,16 +16,16 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     List<Teacher> findByLastname(String lastname);                                 //"Equals" is implied prior to the brackets. Therefore, it's not a good choice when we have string-type variable.
 
-    List<Teacher> findByActiveTrue();
+    List<Teacher> findByActiveTrue();                                              // Not need for a parameter in the brackets. WHERE active = true is implied.
 
     List<Teacher> findByLastnameStartingWith(String keyword);                      //LIKE keyword% equivalent --preferred case, quicker!
-    List<Teacher> findByLastnameContainingIgnoreCase(String keyword);              //LIKE %keyword% equivalent
+    List<Teacher> findByLastnameContainingIgnoreCase(String keyword);              //LIKE %keyword% equivalent --not need to distinguish Upper/Lower case letters (ignore).
 
     boolean existsByLastname(String lastname);
 
-    long countByActiveTrue();                                                     // All the above until here, are the so called Derived queries. And are very efficient and worth using. Spring boot does the SQL equivalent command. Here is only verb-field-keyword.
+    long countByActiveTrue();                                                     // All the above until here, are the so called Derived queries. And are very efficient and worth-using. Spring boot does the SQL equivalent command. Here is only: verb-field-keyword.
                                                                                   // For simple-to-middle complex queries only.  When complicated queries are needed including 3-4 JOIN then the best way is the below one with @query in JPQL!!!
 
-    @Query("SELECT t FROM Teacher t WHERE t.lastname LIKE :prefix% AND t.active = true")
+    @Query("SELECT t FROM Teacher t WHERE t.lastname LIKE :prefix% AND t.active = true")          // Custom query with @Query (in JPQL).
     List<Teacher> findActiveByPrefix(@Param("prefix") String prefix);
 }
