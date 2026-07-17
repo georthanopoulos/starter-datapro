@@ -12,9 +12,9 @@ import java.util.UUID;
 //@Repository -- Not needed when we extend the JPA Repository! Otherwise, we DO need to add it! SOS!
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
-    Optional<Teacher> findByUuid(UUID uuid);                                       //"equals" is implied.
+    Optional<Teacher> findByUuid(UUID uuid);                                       //"Equals" is implied prior to the brackets.
 
-    List<Teacher> findByLastname(String lastname);                                 //"equals" is implied. Therefore, it's not a good choice when we have string-type variable.
+    List<Teacher> findByLastname(String lastname);                                 //"Equals" is implied prior to the brackets. Therefore, it's not a good choice when we have string-type variable.
 
     List<Teacher> findByActiveTrue();
 
